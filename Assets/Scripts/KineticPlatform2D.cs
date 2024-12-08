@@ -107,13 +107,16 @@ public abstract class KinematicPlatform2D : MonoBehaviour
     // so it moves along with the platform.
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        collision.rigidbody.transform.SetParent(transform);
+            collision.rigidbody.transform.SetParent(transform);     
     }
 
     // Unparents any Rigidbody when they leave the platform,
     // so it stops moving along with the platform.
     protected virtual void OnCollisionExit2D(Collision2D collision)
     {
-        collision.rigidbody.transform.SetParent(null);
+        if (gameObject.activeInHierarchy)
+        {
+            collision.rigidbody.transform.SetParent(null);
+        }
     }
 }
